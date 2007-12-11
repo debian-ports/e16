@@ -1,0 +1,101 @@
+diff -ruN a/config/enlightenment.menu b/config/enlightenment.menu
+--- a/config/enlightenment.menu	2007-11-30 13:27:24.000000000 -0500
++++ b/config/enlightenment.menu	2007-12-11 08:19:03.241909088 -0500
+@@ -1,5 +1,6 @@
+-"Enlightenment" "ROOT"
++"e16" "ROOT"
+ "User Menus"            NULL menu file.menu
++"Debian Menu"           NULL menu /var/lib/e16/debian.menu
+ "Desktop"               NULL menu desktop.menu
+ "Settings"              NULL menu settings.menu
+ "Themes"                NULL menu themes
+@@ -7,5 +8,5 @@
+ "Help"                  NULL exec "edox $EROOT/E-docs"
+ "About Enlightenment"   NULL about
+ "About this theme"      NULL exec "edox $ETHEME/ABOUT"
+-"Restart Enlightenment" NULL exit restart
++"Restart"               NULL "exit restart"
+ "Log Out"               NULL exit logout
+diff -ruN a/misc/e16-gnome.desktop.in b/misc/e16-gnome.desktop.in
+--- a/misc/e16-gnome.desktop.in	2007-11-30 13:27:24.000000000 -0500
++++ b/misc/e16-gnome.desktop.in	2007-12-11 08:19:03.242909081 -0500
+@@ -1,7 +1,7 @@
+ [Desktop Entry]
+ Encoding=UTF-8
+ Type=XSession
+-Name=E-GNOME
+-Comment=This session starts GNOME using enlightenment (e16) as window manager
+-Exec=e16-gnome
++name=e16-gnome
++Comment=This session starts GNOME using e16 as window manager
++Exec=/usr/share/e16/scripts/starte16-gnome
+ Icon=@ENLIGHTENMENT_ROOT@/misc/e16.png
+diff -ruN a/misc/e16-kde.desktop.in b/misc/e16-kde.desktop.in
+--- a/misc/e16-kde.desktop.in	2007-11-30 13:27:24.000000000 -0500
++++ b/misc/e16-kde.desktop.in	2007-12-11 08:19:03.249909025 -0500
+@@ -1,7 +1,7 @@
+ [Desktop Entry]
+ Encoding=UTF-8
+ Type=XSession
+-Name=E-KDE
+-Comment=This session starts KDE using enlightenment (e16) as window manager
+-Exec=e16-kde
++name=e16-kde
++Comment=This session starts KDE using e16 as window manager
++Exec=/usr/share/e16/scripts/starte16-kde
+ Icon=@ENLIGHTENMENT_ROOT@/misc/e16.png
+diff -ruN a/misc/e16.desktop.in b/misc/e16.desktop.in
+--- a/misc/e16.desktop.in	2007-11-30 13:27:24.000000000 -0500
++++ b/misc/e16.desktop.in	2007-12-11 08:19:03.249909025 -0500
+@@ -2,6 +2,6 @@
+ Encoding=UTF-8
+ Type=XSession
+ Name=E16
+-Comment=This session starts the Enlightenment (e16) window manager
+-Exec=e16
++Comment=This session starts the e16 window manager
++Exec=/usr/share/e16/scripts/starte16
+ Icon=@ENLIGHTENMENT_ROOT@/misc/e16.png
+diff -ruN a/misc/starte16 b/misc/starte16
+--- a/misc/starte16	2007-11-30 13:27:24.000000000 -0500
++++ b/misc/starte16	2007-12-11 08:19:03.250909017 -0500
+@@ -1,5 +1,9 @@
+ #!/bin/sh
+-case "$1" in
++
++session=$1
++test -z "$session" && session=${0##*starte16-}
++
++case "$session" in
+ gnome|GNOME)
+ 	export WINDOW_MANAGER=e16
+ 	exec gnome-session
+diff -ruN a/misc/starte16.orig b/misc/starte16.orig
+--- a/misc/starte16.orig	1969-12-31 19:00:00.000000000 -0500
++++ b/misc/starte16.orig	2007-11-30 13:27:24.000000000 -0500
+@@ -0,0 +1,14 @@
++#!/bin/sh
++case "$1" in
++gnome|GNOME)
++	export WINDOW_MANAGER=e16
++	exec gnome-session
++	;;
++kde|KDE)
++	export KDEWM=e16
++	exec startkde
++	;;
++*)
++	exec e16
++	;;
++esac
+diff -ruN a/scripts/e_gen_menu b/scripts/e_gen_menu
+--- a/scripts/e_gen_menu	2007-11-30 13:27:24.000000000 -0500
++++ b/scripts/e_gen_menu	2007-12-11 08:19:03.250909017 -0500
+@@ -82,6 +82,7 @@
+ @MainMenu = (
+ 	"t:User Menus",
+ 	"m:User Application List:user_apps.menu",
++	"m:DEBIAN:/var/lib/e16/debian.menu",
+ 	"m:GNOME:menus_GNOME/index.menu",
+ 	"m:KDE:menus_KDE/index.menu",
+ 	"m:Other:menus_Other/index.menu",

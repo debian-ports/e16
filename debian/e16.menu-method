@@ -1,0 +1,42 @@
+#!/usr/bin/install-menu
+
+!include menu.h
+
+compat="menu-2";
+outputencoding="LOCALE";
+
+treewalk="c(m)";
+rootprefix="/var/lib/e16/";
+userprefix=".e16/menus_debian/";
+mainmenutitle="Debian Menu";
+
+function menu_sh() = prefix() "debian_menu_sh";
+prerun="set -e; rm -f " prefix() "debian*menu/" menu_sh();
+postrun="set -e; cat " menu_sh() " | sh; rm -f " menu_sh();
+
+function quote($text)= "\"" replacewith($text,"\"","'") "\"";
+function tick($text)= "'" escwith($text,"'", "'\\'") "'";
+
+function space()= "   ";
+function newline()="\n";
+
+function entry($com)= quote(title()) space() 
+                      ifelse(icon(),quote(icon()),"NULL") space() 
+		      "exec" space() 
+		      $com;
+
+supported;
+  wm=         entry(quote("eesh -e " tick("exit exec " $command)) newline());
+  x11=        entry(quote($command) newline());
+  text=       entry(quote(term()) newline());
+endsupported;
+
+function etitle()= esc(tolower(replacewith(replace("/" $section,"//",""),"/ ","__") ".menu"),"()");
+
+startmenu= "cat > " prefix() tick(etitle()) " << 'END'" newline() quote(title()) newline();
+
+endmenu= "END" newline() newline();
+
+submenutitle=quote(title()) " NULL   menu " quote(prefix() etitle()) "\n";
+
+genmenu="debian_menu_sh";

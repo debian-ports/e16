@@ -1,0 +1,55 @@
+#pod2man --section=1 --release="Debian" --center=" " --date="3 April 2005" e-utils.pod
+
+=head1 NAME
+
+e-utils - enlightement utilities
+
+=head1 SYNOPSIS
+
+e-utils are various scripts and programs used by the enlightenment
+window manager. They are generally employed directly by enlightenment
+itself or through menu selections.
+
+=head1 DESCRIPTION
+
+=item
+
+B<epp> - the enlightenment pre-processor, processes macros in enlightenment's config files
+
+=item
+
+B<edox> - enlightenment documentation viewer
+
+=item
+
+B<eesh> - enlightenment extended shell, sends IPC commands to enlightenment, see
+eesh C<-h> for more info
+
+=item
+
+B<starte16> - enlightenment startup script
+
+=item
+
+B<e_cache_clean> - cleans up parts of your enlightenment cache
+
+=item
+
+B<e_cache_query> - queries sizes of your enlightenment cache
+
+=item
+
+B<e_gen_menu> - generates a file.menu format for Enlightenment out of menu hierarchies
+
+=head1 NOTES
+
+The e-utils(1) man page is quite pathetic.
+
+=head1 AUTHOR
+
+Laurence J. Lane <B<ljlane@debian.org>>
+
+=head1 SEE ALSO
+
+enlightenment(1)
+

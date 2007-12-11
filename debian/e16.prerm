@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+wm=e16
+
+case "$1" in
+  remove|upgrade|failed-upgrade)
+      update-alternatives  --remove x-window-manager /usr/bin/$wm
+;;
+*)
+;;
+esac
+
+#DEBHELPER#

@@ -1,0 +1,40 @@
+#!/usr/bin/make -f
+
+include /usr/share/cdbs/1/rules/patchsys-quilt.mk
+include /usr/share/cdbs/1/rules/debhelper.mk
+
+include /usr/share/cdbs/1/class/makefile.mk
+include /usr/share/cdbs/1/class/autotools.mk
+include /usr/share/cdbs/1/class/gnome.mk
+
+ifeq ($(DEB_BUILD_ARCH),alpha)
+  alphacfg = --disable-zoom
+endif
+
+#export DH_VERBOSE=1
+
+DEB_AUTO_UPDATE_AUTOCONF += 2.13
+DEB_AUTO_UPDATE_ACLOCAL += 1.10
+DEB_AUTO_UPDATE_AUTOMAKE += 1.10
+DEB_CONFIGURE_SCRIPT_ENV += LDFLAGS=" -Wl,--as-needed"
+DEB_DH_INSTALL_SOURCEDIR += $(DEB_DESTDIR)
+DEB_CONFIGURE_EXTRA_FLAGS += $(alphacfg) \
+	--enable-upgrade=no \
+	--enable-hints-gnome \
+	--enable-pango \
+	--libdir=/usr/lib \
+	--disable-esdtest
+
+binary-post-install/e16::
+	rm debian/e16/usr/bin/starte16
+
+binary-post-install/e16-data:: winter=debian/e16-data/usr/share/e16/themes/winter
+binary-post-install/e16-data:: vera=/usr/share/fonts/truetype/ttf-bitstream-vera
+binary-post-install/e16-data::
+	rm -r debian/e16-data/usr/share/e16/misc/
+	rm ${winter}/ttfonts/*
+	cd ${winter}/ttfonts/; ln -s ${vera}/Vera.ttf
+	cd ${winter}/ttfonts/; ln -s ${vera}/VeraBd.ttf
+	cd ${winter}/ABOUT/; ln -s ${vera}/Vera.ttf vixar.ttf
+	cp debian/e16-data.lintian debian/e16-data/usr/share/lintian/overrides/e16-data
+	chmod -x ${winter}/ABOUT/MAIN

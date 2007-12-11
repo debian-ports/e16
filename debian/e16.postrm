@@ -1,0 +1,18 @@
+#!/bin/sh -e
+
+wm=e16
+
+inst=/etc/menu-methods/$wm
+if [ "$1" = 'remove' ]; then
+    if [ -f $inst ]; then
+            chmod a-x $inst
+            if [ -x /usr/bin/update-menus ]; then update-menus ; fi
+    fi
+fi
+
+
+if [ "$1" = 'purge' ] && [ -d /var/lib/$wm ]; then
+     rm -rf /var/lib/$wm
+fi
+
+#DEBHELPER#

@@ -1,0 +1,5 @@
+If you are upgrading from enlightenment 0.16.x, the user
+settings directory has changed name and layout. Please read 
+README-0.16.8 in /usr/share/doc/e16/ for the full migration
+notes.
+

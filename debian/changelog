@@ -1,0 +1,6 @@
+e16 (0.16.8.10.dfsg.1-1) unstable; urgency=low
+
+  * Intitial package release
+  * upstream fork of DR16 allows enlightenment package to move to DR17
+
+ -- Laurence J. Lane <ljlane@debian.org>  Tue, 11 Dec 2007 11:25:30 -0500

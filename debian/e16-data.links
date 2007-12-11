@@ -1,0 +1,6 @@
+usr/share/e16/scripts/starte16 usr/share/e16/scripts/starte16-gnome
+usr/share/e16/scripts/starte16 usr/share/e16/scripts/starte16-kde
+usr/share/man/man1/e16-utils.1.gz usr/share/man/man1/starte16.1.gz
+usr/share/man/man1/e16-utils.1.gz usr/share/man/man1/e_cache_clean.1.gz
+usr/share/man/man1/e16-utils.1.gz usr/share/man/man1/e_cache_query.1.gz
+usr/share/man/man1/e16-utils.1.gz usr/share/man/man1/gen_menu.1.gz

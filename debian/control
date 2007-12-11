@@ -1,0 +1,34 @@
+Source: e16
+Section: x11
+Priority: optional
+Maintainer: Laurence J. Lane <ljlane@debian.org>
+Build-Depends: libxft-dev, libttf-dev, libesd0-dev, libimlib2-dev, gettext, libsm-dev, libx11-dev, libxext-dev, libxrandr-dev, libxinerama-dev, libxxf86vm-dev, libxt-dev, x-dev, xbitmaps, libxcomposite-dev, libxdamage-dev, libxrender-dev, libpango1.0-dev, pkg-config, cdbs, debhelper (>=4.1.0), quilt, automake, autoconf, libtool, gettext
+Standards-Version: 3.7.3
+Homepage: http://www.enlightenment.org/
+
+Package: e16
+Architecture: any
+Section: x11
+Depends: e16-data (= ${source:Version}), ${shlibs:Depends}
+Recommends: esound, menu
+Conflicts: menu (<< 2.0), enlightenment
+Provides: x-window-manager
+Suggests: eterm | x-terminal-emulator, e16keyedit, e16menuedit2
+Description: the Enlightenment Window Manager DR16
+ e16 is a window manager for the X Window System that is designed
+ to be powerful, extensible, configurable and pretty darned good
+ looking! It is one of the more graphically intense window managers.
+ .
+ e16 goes beyond managing windows by providing a useful and
+ appealing graphical shell from which to work. It is open in design
+ and instead of dictating a policy, allows the user to define their
+ own policy, down to every last detail.
+
+Package: e16-data
+Architecture: all
+Section: x11
+Suggests: enlightenment
+Depends: ttf-bitstream-vera
+Description: e16 window manager support files
+ These are the architecture independent images and scripts for the
+ e16 window manager.

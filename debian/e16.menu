@@ -1,0 +1,2 @@
+?package(e16):needs="wm" section="Window Managers"\
+   title="e16" command="/usr/bin/e16"
