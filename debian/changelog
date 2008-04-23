@@ -1,3 +1,10 @@
+e16 (0.16.8.10.dfsg.1-1.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Deprecate Freetype 1 (Closes: #473488)
+
+ -- Moritz Muehlenhoff <jmm@debian.org>  Wed, 23 Apr 2008 21:27:57 +0200
+
 e16 (0.16.8.10.dfsg.1-1) unstable; urgency=low
 
   * Intitial package release
