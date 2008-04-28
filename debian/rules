@@ -1,40 +1,63 @@
 #!/usr/bin/make -f
 
-include /usr/share/cdbs/1/rules/patchsys-quilt.mk
-include /usr/share/cdbs/1/rules/debhelper.mk
-
-include /usr/share/cdbs/1/class/makefile.mk
-include /usr/share/cdbs/1/class/autotools.mk
-include /usr/share/cdbs/1/class/gnome.mk
-
 ifeq ($(DEB_BUILD_ARCH),alpha)
-  alphacfg = --disable-zoom
+  alphacfg := --disable-zoom
 endif
 
-#export DH_VERBOSE=1
+config_opts := \
+  $(alphacfg) \
+  --enable-upgrade=no \
+  --enable-hints-gnome \
+  --enable-pango \
+  --libdir=/usr/lib \
+  --disable-esdtest \
+  --disable-rpath \
+  --prefix=/usr \
+  LDFLAGS="$${LDFLAGS} -Wl,--as-needed"
 
-DEB_AUTO_UPDATE_AUTOCONF += 2.13
-DEB_AUTO_UPDATE_ACLOCAL += 1.10
-DEB_AUTO_UPDATE_AUTOMAKE += 1.10
-DEB_CONFIGURE_SCRIPT_ENV += LDFLAGS=" -Wl,--as-needed"
-DEB_DH_INSTALL_SOURCEDIR += $(DEB_DESTDIR)
-DEB_CONFIGURE_EXTRA_FLAGS += $(alphacfg) \
-	--enable-upgrade=no \
-	--enable-hints-gnome \
-	--enable-pango \
-	--libdir=/usr/lib \
-	--disable-esdtest
+author := --author 'Laurence J. Lane <ljlane@debian.org>'
+patches := --patches 'debian/patches'
 
-binary-post-install/e16::
-	rm debian/e16/usr/bin/starte16
+initialize-stamp:
+	git init
+	echo debian/e16.debhelper.log >> .git/info/exclude
+	echo debian/e16-data.debhelper.log >> .git/info/exclude
+	git add .
+	git commit -m '$@'
+	git branch work
+	git checkout work
+	git quiltimport $(author) $(patches)
+	touch $@
 
-binary-post-install/e16-data:: winter=debian/e16-data/usr/share/e16/themes/winter
-binary-post-install/e16-data:: vera=/usr/share/fonts/truetype/ttf-bitstream-vera
-binary-post-install/e16-data::
-	rm -r debian/e16-data/usr/share/e16/misc/
-	rm ${winter}/ttfonts/*
-	cd ${winter}/ttfonts/; ln -s ${vera}/Vera.ttf
-	cd ${winter}/ttfonts/; ln -s ${vera}/VeraBd.ttf
-	cd ${winter}/ABOUT/; ln -s ${vera}/Vera.ttf vixar.ttf
-	cp debian/e16-data.lintian debian/e16-data/usr/share/lintian/overrides/e16-data
-	chmod -x ${winter}/ABOUT/MAIN
+build: build-stamp
+build-stamp: initialize-stamp
+	dh build --before dh_auto_configure
+	  libtoolize --force
+	  autoreconf -fi
+	  dh_auto_configure -- $(config_opts)
+	  git add .
+	  git commit -m '$@'
+	dh build --after dh_auto_configure
+	touch $@
+
+install: build
+	dh install --before dh_install
+	  dh_install --sourcedir=debian/tmp -pe16 -Pdebian/e16
+	  dh_install --sourcedir=debian/tmp -pe16-data -Pdebian/e16-data
+	dh install --after dh_install
+clean:
+	dh clean
+	test ! -d .git || git commit -a -m '$@'
+	test ! -d .git || git checkout master
+	rm -f misc/*.desktop
+	rm -rf .git
+
+binary-arch: install
+	dh binary-arch
+
+binary-indep: install
+	dh binary-indep
+
+binary: binary-arch binary-indep
+
+.PHONY: initialize build clean install binary binary-%

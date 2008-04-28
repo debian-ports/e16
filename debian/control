@@ -2,16 +2,16 @@ Source: e16
 Section: x11
 Priority: optional
 Maintainer: Laurence J. Lane <ljlane@debian.org>
-Build-Depends: libxft-dev, libfreetype6-dev, libesd0-dev, libimlib2-dev, gettext, libsm-dev, libx11-dev, libxext-dev, libxrandr-dev, libxinerama-dev, libxxf86vm-dev, libxt-dev, x-dev, xbitmaps, libxcomposite-dev, libxdamage-dev, libxrender-dev, libpango1.0-dev, pkg-config, cdbs, debhelper (>=4.1.0), quilt, automake, autoconf, libtool, gettext
+Build-Depends: libxft-dev, libfreetype6-dev, libesd0-dev, libimlib2-dev, gettext, libsm-dev, libx11-dev, libxext-dev, libxrandr-dev, libxinerama-dev, libxxf86vm-dev, libxt-dev, x-dev, xbitmaps, libxcomposite-dev, libxdamage-dev, libxrender-dev, libpango1.0-dev, pkg-config, git-core, debhelper (>=7.0.1), automake, autoconf, libtool, gettext
 Standards-Version: 3.7.3
 Homepage: http://www.enlightenment.org/
 
 Package: e16
 Architecture: any
 Section: x11
-Depends: e16-data (= ${source:Version}), ${shlibs:Depends}
+Depends: e16-data (= ${source:Version}), ${shlibs:Depends}, libimlib2 (>= 1.4.0)
 Recommends: esound, menu
-Conflicts: menu (<< 2.0), enlightenment
+Conflicts: menu (<< 2.0), enlightenment (<< 1:0.16.8)
 Provides: x-window-manager
 Suggests: eterm | x-terminal-emulator, e16keyedit, e16menuedit2
 Description: the Enlightenment Window Manager DR16
@@ -27,8 +27,7 @@ Description: the Enlightenment Window Manager DR16
 Package: e16-data
 Architecture: all
 Section: x11
-Suggests: enlightenment
-Depends: ttf-bitstream-vera
+Conflicts: enlightenment-data (<< 1:0.16.8)
 Description: e16 window manager support files
  These are the architecture independent images and scripts for the
  e16 window manager.

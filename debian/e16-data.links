@@ -4,3 +4,6 @@ usr/share/man/man1/e16-utils.1.gz usr/share/man/man1/starte16.1.gz
 usr/share/man/man1/e16-utils.1.gz usr/share/man/man1/e_cache_clean.1.gz
 usr/share/man/man1/e16-utils.1.gz usr/share/man/man1/e_cache_query.1.gz
 usr/share/man/man1/e16-utils.1.gz usr/share/man/man1/gen_menu.1.gz
+usr/share/e16/misc/e16.desktop usr/share/xsessions/e16.desktop
+usr/share/e16/misc/e16-gnome.desktop usr/share/xsessions/e16-gnome.desktop
+usr/share/e16/misc/e16-kde.desktop usr/share/xsessions/e16-kde.desktop

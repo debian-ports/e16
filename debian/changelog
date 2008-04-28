@@ -1,9 +1,18 @@
-e16 (0.16.8.10.dfsg.1-1.1) unstable; urgency=low
+e16 (0.16.8.12-1) unstable; urgency=low
 
-  * Non-maintainer upload.
-  * Deprecate Freetype 1 (Closes: #473488)
+  * new upstream version reported by Jan Luebbe. Thanks. Closes: #469192
+  * added versioned enlightenment conflicts. Reported by Pavel Reznicek.
+    Thanks. Closes: #456893
+  * added version to libimlib2 dependency. Reported by Oohara Yuuma.
+    Thanks. Closes: #471464
+  * removed ttf-bitstream-vera dependency. Reported by Daniel Baumann.
+    Thanks. Closes: #461264
+  * returned to pristine upstream source since ttf-bitstream-vera has
+    been vanquished and upstream removed vixar.ttf. Rejoice.
+  * Moritz Muehlenhoff NMU'd to deprecate Freetype 1 dependency. Thanks.
+  * removed quilt and cdbs, added git and debhelper 7
 
- -- Moritz Muehlenhoff <jmm@debian.org>  Wed, 23 Apr 2008 21:27:57 +0200
+ -- Laurence J. Lane <ljlane@debian.org>  Mon, 28 Apr 2008 14:05:18 -0400
 
 e16 (0.16.8.10.dfsg.1-1) unstable; urgency=low
 

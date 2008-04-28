@@ -1,2 +1,2 @@
-usr/share/
-usr/bin/starte16 usr/share/e16/scripts/
+usr/share/e16 usr/share/locale usr/share
+usr/bin/starte16 usr/share/e16/scripts
