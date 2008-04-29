@@ -1,3 +1,10 @@
+e16 (0.16.8.12-2) unstable; urgency=low
+
+  * build failure cleanup (for shame, use cowbuilder, silly)
+  * enabled dbus support
+
+ -- Laurence J. Lane <ljlane@debian.org>  Mon, 28 Apr 2008 22:40:42 -0400
+
 e16 (0.16.8.12-1) unstable; urgency=low
 
   * new upstream version reported by Jan Luebbe. Thanks. Closes: #469192

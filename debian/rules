@@ -13,20 +13,24 @@ config_opts := \
   --disable-esdtest \
   --disable-rpath \
   --prefix=/usr \
+  --enable-dbus \
   LDFLAGS="$${LDFLAGS} -Wl,--as-needed"
 
-author := --author 'Laurence J. Lane <ljlane@debian.org>'
+author := --author 'Your Name <you@example.com>'
 patches := --patches 'debian/patches'
 
 initialize-stamp:
 	git init
-	echo debian/e16.debhelper.log >> .git/info/exclude
-	echo debian/e16-data.debhelper.log >> .git/info/exclude
+	git config user.email 'you@example.com'
+	git config user.name 'Your Name'
+	cp debian/git.exclude .git/info/exclude
 	git add .
 	git commit -m '$@'
 	git branch work
 	git checkout work
-	git quiltimport $(author) $(patches)
+	git quiltimport \
+	  --author 'Your Name <you@example.com>' \
+	  --patches 'debian/patches'
 	touch $@
 
 build: build-stamp
@@ -47,10 +51,9 @@ install: build
 	dh install --after dh_install
 clean:
 	dh clean
-	test ! -d .git || git commit -a -m '$@'
+	test ! -d .git || git commit -am '$@'
 	test ! -d .git || git checkout master
-	rm -f misc/*.desktop
-	rm -rf .git
+	rm -rf .git misc/*.desktop
 
 binary-arch: install
 	dh binary-arch
