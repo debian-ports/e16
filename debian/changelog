@@ -1,3 +1,9 @@
+e16 (0.16.8.13-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Laurence J. Lane <ljlane@debian.org>  Thu, 08 May 2008 06:42:25 -0400
+
 e16 (0.16.8.12-2) unstable; urgency=low
 
   * build failure cleanup (for shame, use cowbuilder, silly)
