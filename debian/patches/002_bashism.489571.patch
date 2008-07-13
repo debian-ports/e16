@@ -1,0 +1,13 @@
+Index: b/scripts/e_cache_query
+===================================================================
+--- a/scripts/e_cache_query	2008-07-13 16:09:00.305293726 -0400
++++ b/scripts/e_cache_query	2008-07-13 21:43:56.264395057 -0400
+@@ -37,7 +37,7 @@
+   VAL=`du -s $ECACHEDIR/cached/pager $ECACHEDIR/cached/bgsel $ECACHEDIR/cached/cfg | awk '{printf("%s ", $1);}'`
+   TOT=0
+   for I in $VAL; do
+-    let TOT=$(($TOT + $I));
++    TOT=$((TOT + I))
+   done
+   eesh -e "dialog_ok Your caches are using $TOT Kb of disk space."
+   exit

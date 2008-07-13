@@ -1,1 +1,3 @@
+000_build_hacks.patch
 001_xsession_and_menus.patch
+002_bashism.489571.patch

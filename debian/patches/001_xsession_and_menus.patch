@@ -1,7 +1,7 @@
-Index: e16-0.16.8.12/config/enlightenment.menu
+Index: b/config/enlightenment.menu
 ===================================================================
---- e16-0.16.8.12.orig/config/enlightenment.menu	2008-04-26 22:15:37.675004198 -0400
-+++ e16-0.16.8.12/config/enlightenment.menu	2008-04-26 22:16:02.123005076 -0400
+--- a/config/enlightenment.menu	2007-12-21 17:42:01.000000000 -0500
++++ b/config/enlightenment.menu	2008-07-12 12:00:18.482610466 -0400
 @@ -1,11 +1,12 @@
 -"Enlightenment" "ROOT"
 +"e16" "ROOT"
@@ -17,10 +17,10 @@ Index: e16-0.16.8.12/config/enlightenment.menu
  "About this theme"	NULL exec "edox $ETHEME/ABOUT"
  "Restart"		NULL "exit restart"
  "Log Out"		NULL "exit logout"
-Index: e16-0.16.8.12/misc/starte16
+Index: b/misc/starte16
 ===================================================================
---- e16-0.16.8.12.orig/misc/starte16	2008-04-26 22:15:37.691004227 -0400
-+++ e16-0.16.8.12/misc/starte16	2008-04-26 22:16:02.123005076 -0400
+--- a/misc/starte16	2007-09-22 08:21:40.000000000 -0400
++++ b/misc/starte16	2008-07-12 12:00:18.482610466 -0400
 @@ -1,5 +1,9 @@
  #!/bin/sh
 -case "$1" in
@@ -32,10 +32,10 @@ Index: e16-0.16.8.12/misc/starte16
  gnome|GNOME)
  	export WINDOW_MANAGER=e16
  	exec gnome-session
-Index: e16-0.16.8.12/scripts/e_gen_menu
+Index: b/scripts/e_gen_menu
 ===================================================================
---- e16-0.16.8.12.orig/scripts/e_gen_menu	2008-04-26 22:15:37.703004301 -0400
-+++ e16-0.16.8.12/scripts/e_gen_menu	2008-04-26 22:16:02.123005076 -0400
+--- a/scripts/e_gen_menu	2008-03-22 12:20:18.000000000 -0400
++++ b/scripts/e_gen_menu	2008-07-12 12:00:18.482610466 -0400
 @@ -83,6 +83,7 @@
  @MainMenu = (
  	"t:User Menus",
@@ -44,10 +44,10 @@ Index: e16-0.16.8.12/scripts/e_gen_menu
  	"m:GNOME:menus_GNOME/index.menu",
  	"m:KDE:menus_KDE/index.menu",
  	"m:Other:menus_Other/index.menu",
-Index: e16-0.16.8.12/misc/e16-gnome.desktop.in
+Index: b/misc/e16-gnome.desktop.in
 ===================================================================
---- e16-0.16.8.12.orig/misc/e16-gnome.desktop.in	2008-04-26 22:15:37.679004251 -0400
-+++ e16-0.16.8.12/misc/e16-gnome.desktop.in	2008-04-26 22:16:02.127004592 -0400
+--- a/misc/e16-gnome.desktop.in	2007-12-21 17:42:01.000000000 -0500
++++ b/misc/e16-gnome.desktop.in	2008-07-12 12:00:18.482610466 -0400
 @@ -3,5 +3,5 @@
  Type=XSession
  Name=E16-GNOME
@@ -55,10 +55,10 @@ Index: e16-0.16.8.12/misc/e16-gnome.desktop.in
 -Exec=e16-gnome
 +Exec=/usr/share/e16/scripts/starte16-gnome
  Icon=@pkgdatadir@/misc/e16.png
-Index: e16-0.16.8.12/misc/e16-kde.desktop.in
+Index: b/misc/e16-kde.desktop.in
 ===================================================================
---- e16-0.16.8.12.orig/misc/e16-kde.desktop.in	2008-04-26 22:15:37.683004500 -0400
-+++ e16-0.16.8.12/misc/e16-kde.desktop.in	2008-04-26 22:16:02.127004592 -0400
+--- a/misc/e16-kde.desktop.in	2007-12-21 17:42:01.000000000 -0500
++++ b/misc/e16-kde.desktop.in	2008-07-12 12:00:18.483609816 -0400
 @@ -3,5 +3,5 @@
  Type=XSession
  Name=E16-KDE
@@ -66,10 +66,10 @@ Index: e16-0.16.8.12/misc/e16-kde.desktop.in
 -Exec=e16-kde
 +Exec=/usr/share/e16/scripts/starte16-kde
  Icon=@pkgdatadir@/misc/e16.png
-Index: e16-0.16.8.12/misc/e16.desktop.in
+Index: b/misc/e16.desktop.in
 ===================================================================
---- e16-0.16.8.12.orig/misc/e16.desktop.in	2008-04-26 22:15:37.687004437 -0400
-+++ e16-0.16.8.12/misc/e16.desktop.in	2008-04-26 22:16:02.127004592 -0400
+--- a/misc/e16.desktop.in	2007-11-18 04:58:20.000000000 -0500
++++ b/misc/e16.desktop.in	2008-07-12 12:00:18.483609816 -0400
 @@ -3,5 +3,5 @@
  Type=XSession
  Name=E16
@@ -77,3 +77,4 @@ Index: e16-0.16.8.12/misc/e16.desktop.in
 -Exec=e16
 +Exec=/usr/share/e16/scripts/starte16
  Icon=@pkgdatadir@/misc/e16.png
+

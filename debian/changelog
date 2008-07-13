@@ -1,3 +1,13 @@
+e16 (0.16.8.13-2) unstable; urgency=low
+
+  * reverted to quilt patch handling. Fixes dpkg source v3.0 (quilt)
+    FTBFS reported by Raphael Hertzog. Thanks. Closes: #482747
+  * fixed bashism in e_cache_query. Reported by Raphael Geissert.
+    Thanks. Closes: #489571
+  * added a new whacky build directory scheme and a debian/README.source
+
+ -- Laurence J. Lane <ljlane@debian.org>  Sun, 13 Jul 2008 19:20:41 -0400
+
 e16 (0.16.8.13-1) unstable; urgency=low
 
   * New upstream release

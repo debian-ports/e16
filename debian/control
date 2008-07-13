@@ -2,8 +2,8 @@ Source: e16
 Section: x11
 Priority: optional
 Maintainer: Laurence J. Lane <ljlane@debian.org>
-Build-Depends: libxft-dev, libesd0-dev, libimlib2-dev, gettext, libsm-dev, libx11-dev, libxext-dev, libxrandr-dev, libxinerama-dev, libxxf86vm-dev, libxt-dev, x-dev, xbitmaps, libxcomposite-dev, libxdamage-dev, libxrender-dev, libpango1.0-dev, pkg-config, git-core, debhelper (>=7.0.1), automake, autoconf, libtool, gettext, cvs, libdbus-1-dev
-Standards-Version: 3.7.3
+Build-Depends: libxft-dev, libesd0-dev, libimlib2-dev, gettext, libdbus-1-dev, libsm-dev, libx11-dev, libxext-dev, libxrandr-dev, libxinerama-dev, libxxf86vm-dev, libxt-dev, xbitmaps, libxcomposite-dev, libxdamage-dev, libxrender-dev, libpango1.0-dev, pkg-config, debhelper (>=7.0.1), automake, autoconf, libtool, gettext, quilt, cvs
+Standards-Version: 3.8.0
 Homepage: http://www.enlightenment.org/
 
 Package: e16

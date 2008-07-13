@@ -1,0 +1,56 @@
+introduction
+============
+
+e16 is mostly a quilt patch style package with additional build
+directory trickery. quilt patches are recommended to modify the build.
+Details on using the quilt system can be found in the quilt package's
+/usr/share/doc/quilt/README.source file.
+
+This is a simplified view the package build:
+
+  debian/rules -> /usr/bin/dh -> builddir.mk -> package build/install
+
+
+debian/rules
+============
+
+The package is built with debhelper's dh command. debian/rules patches
+the source with quilt then copies debian/builddir.mk to the top level
+Makefile. Although Spartan, the debian/rules file is deliberately
+verbose enough to show that source is patched and there is a custom
+Makefile.
+
+
+top level Makefile
+==================
+
+The Makefile operates conditionally based on the current working
+directory (top level or build) and is used as an interface to the
+/usr/bin/dh command. The Makefile copies the source to debian/build,
+configures and compiles the source and installs the results to
+debian/tmp. The Makefile also has a clean target that removes
+debian/build and the Makefile.
+
+
+configure script
+================
+
+The source is patched to disable the stock configure script. It
+is not used and disabling it allows omitting /usr/bin/dh calls
+around dh_auto_config. A new configure script and is generated in
+debian/build/ via autoreconf. configure script options, including
+LDFLAGS, are included from the debian/config.mk file.
+
+
+rationale
+=========
+
+I've read the GNU make documention and I was bored. Building in the
+source directory is bad mojo anyway. Regenerating the configure script
+makes a quite a mess too. All of that stuff and compiling is done on a
+copy of the source in the discardable debian/build directory. Doing all
+of that in debian/rules along with /usr/bin/dh would be a horror show.
+
+quilt and dpkg source v3.0 (quilt) can easily handle the patch work.
+
+Send comments to me at gmail. I'm ljlane.

@@ -1,66 +1,15 @@
 #!/usr/bin/make -f
 
-ifeq ($(DEB_BUILD_ARCH),alpha)
-  alphacfg := --disable-zoom
-endif
+include /usr/share/quilt/quilt.make
 
-config_opts := \
-  $(alphacfg) \
-  --enable-upgrade=no \
-  --enable-hints-gnome \
-  --enable-pango \
-  --libdir=/usr/lib \
-  --disable-esdtest \
-  --disable-rpath \
-  --prefix=/usr \
-  --enable-dbus \
-  LDFLAGS="$${LDFLAGS} -Wl,--as-needed"
+%:
+	dh $@
 
-author := --author 'Your Name <you@example.com>'
-patches := --patches 'debian/patches'
+build: patch
+	cp debian/builddir.mk Makefile
+	dh build
 
-initialize-stamp:
-	git init
-	git config user.email 'you@example.com'
-	git config user.name 'Your Name'
-	cp debian/git.exclude .git/info/exclude
-	git add .
-	git commit -m '$@'
-	git branch work
-	git checkout work
-	git quiltimport \
-	  --author 'Your Name <you@example.com>' \
-	  --patches 'debian/patches'
-	touch $@
-
-build: build-stamp
-build-stamp: initialize-stamp
-	dh build --before dh_auto_configure
-	  libtoolize --force
-	  autoreconf -fi
-	  dh_auto_configure -- $(config_opts)
-	  git add .
-	  git commit -m '$@'
-	dh build --after dh_auto_configure
-	touch $@
-
-install: build
-	dh install --before dh_install
-	  dh_install --sourcedir=debian/tmp -pe16 -Pdebian/e16
-	  dh_install --sourcedir=debian/tmp -pe16-data -Pdebian/e16-data
-	dh install --after dh_install
-clean:
+clean: unpatch
 	dh clean
-	test ! -d .git || git commit -am '$@'
-	test ! -d .git || git checkout master
-	rm -rf .git misc/*.desktop
 
-binary-arch: install
-	dh binary-arch
-
-binary-indep: install
-	dh binary-indep
-
-binary: binary-arch binary-indep
-
-.PHONY: initialize build clean install binary binary-%
+# Please read debian/README.Source for details on this build
